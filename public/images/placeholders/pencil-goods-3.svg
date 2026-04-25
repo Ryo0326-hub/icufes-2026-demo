@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#f0fdfa"/>
+  <rect x="208" y="160" width="120" height="120" rx="28" fill="#67e8f9" stroke="#155e75" stroke-width="9" transform="rotate(-9 268 220)"/>
+  <rect x="345" y="190" width="122" height="122" rx="30" fill="#f9a8d4" stroke="#831843" stroke-width="9" transform="rotate(8 406 251)"/>
+  <rect x="495" y="151" width="118" height="118" rx="28" fill="#fde68a" stroke="#92400e" stroke-width="9" transform="rotate(12 554 210)"/>
+  <text x="400" y="405" text-anchor="middle" font-family="Verdana" font-size="40" font-weight="700" fill="#134e4a">Sticker Set</text>
+</svg>

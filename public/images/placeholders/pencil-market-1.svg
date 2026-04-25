@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#effaf1"/>
+  <path d="M180 196h440l-38 221H218z" fill="#fff7ed" stroke="#166534" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M165 193l69-83h330l70 83z" fill="#86efac" stroke="#166534" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M242 112v83M325 112v83M408 112v83M491 112v83M574 112v83" stroke="#166534" stroke-width="7" opacity=".4"/>
+  <circle cx="303" cy="292" r="30" fill="#f97316" opacity=".85"/>
+  <circle cx="394" cy="301" r="28" fill="#22c55e" opacity=".85"/>
+  <circle cx="485" cy="288" r="27" fill="#ef4444" opacity=".85"/>
+  <text x="400" y="72" text-anchor="middle" font-family="Verdana" font-size="38" font-weight="700" fill="#14532d">Local Market</text>
+</svg>

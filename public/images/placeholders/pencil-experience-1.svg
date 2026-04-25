@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#f4f0ff"/>
+  <path d="M228 350c52-96 120-142 204-138 75 3 128 49 164 138" fill="none" stroke="#7c3aed" stroke-width="18" stroke-linecap="round" opacity=".58"/>
+  <rect x="280" y="195" width="240" height="150" rx="38" fill="#ddd6fe" stroke="#4c1d95" stroke-width="10"/>
+  <circle cx="360" cy="270" r="24" fill="#38bdf8"/>
+  <circle cx="445" cy="270" r="24" fill="#f472b6"/>
+  <path d="M211 415c103 25 270 31 381 3" fill="none" stroke="#312e81" stroke-width="10" stroke-linecap="round" opacity=".45"/>
+  <text x="400" y="95" text-anchor="middle" font-family="Verdana" font-size="40" font-weight="700" fill="#4c1d95">Play Booth</text>
+</svg>

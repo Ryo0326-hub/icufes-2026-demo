@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#e7f5ff"/>
+  <path d="M314 154h174l-25 270H340z" fill="#bfdbfe" stroke="#1e40af" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M309 210h184" stroke="#1e40af" stroke-width="8" opacity=".35"/>
+  <path d="M356 150c38-58 97-80 178-65" fill="none" stroke="#38bdf8" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="379" cy="288" r="22" fill="#60a5fa" opacity=".9"/>
+  <circle cx="430" cy="330" r="16" fill="#93c5fd" opacity=".9"/>
+  <path d="M267 434c91 28 245 31 341 0" fill="none" stroke="#172554" stroke-width="10" stroke-linecap="round" opacity=".45"/>
+  <text x="400" y="90" text-anchor="middle" font-family="Verdana" font-size="42" font-weight="700" fill="#075985">Blue Drinks</text>
+</svg>

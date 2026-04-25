@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+  <rect width="900" height="560" fill="#07111f"/>
+  <path d="M0 405c126-76 255-99 386-69 132 30 230 5 340-66 68-44 126-62 174-66v356H0z" fill="#0f2a56"/>
+  <path d="M186 418h528l-42-170H228z" fill="#111827" stroke="#67e8f9" stroke-width="8"/>
+  <path d="M280 242l120-110 120 110M410 242l105-82 105 82" fill="none" stroke="#38bdf8" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="318" cy="305" r="32" fill="#facc15"/>
+  <circle cx="452" cy="292" r="42" fill="#22d3ee"/>
+  <circle cx="594" cy="305" r="32" fill="#f472b6"/>
+  <path d="M250 470c120 30 292 33 420 0" stroke="#bae6fd" stroke-width="8" stroke-linecap="round" opacity=".6"/>
+  <text x="450" y="92" text-anchor="middle" font-family="Verdana" font-size="46" font-weight="700" fill="#e0f2fe">Stage Night</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+  <rect width="900" height="560" fill="#020617"/>
+  <circle cx="450" cy="235" r="130" fill="#1d4ed8" opacity=".45"/>
+  <path d="M260 375c70-90 142-132 217-126 72 6 129 48 174 126" fill="none" stroke="#67e8f9" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="360" cy="255" r="48" fill="#e0f2fe"/>
+  <circle cx="540" cy="255" r="48" fill="#fef3c7"/>
+  <path d="M315 385h270" stroke="#e0f2fe" stroke-width="11" stroke-linecap="round" opacity=".7"/>
+  <path d="M155 115l18 18-18 18-18-18zM720 128l14 14-14 14-14-14zM660 410l20 20-20 20-20-20z" fill="#bae6fd"/>
+  <text x="450" y="90" text-anchor="middle" font-family="Verdana" font-size="44" font-weight="700" fill="#e0f2fe">Talk Session</text>
+</svg>

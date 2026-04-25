@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#eef7ff"/>
+  <path d="M238 183h318l-34 213H272z" fill="#f9f1d2" stroke="#28486b" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M271 182c12-46 65-74 122-49 35-48 119-25 133 49" fill="none" stroke="#3b82f6" stroke-width="14" stroke-linecap="round" opacity=".65"/>
+  <path d="M304 232h187M296 282h210M291 332h176" stroke="#28486b" stroke-width="8" stroke-linecap="round" opacity=".45"/>
+  <circle cx="334" cy="166" r="31" fill="#fb7185" opacity=".82"/>
+  <circle cx="457" cy="150" r="25" fill="#facc15" opacity=".9"/>
+  <path d="M207 421c104 23 265 32 389 3" fill="none" stroke="#0f172a" stroke-width="10" stroke-linecap="round" opacity=".45"/>
+  <text x="400" y="86" text-anchor="middle" font-family="Verdana" font-size="40" font-weight="700" fill="#1e3a8a">Sweet Stand</text>
+</svg>

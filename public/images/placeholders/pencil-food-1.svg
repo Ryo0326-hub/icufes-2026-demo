@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#f8ecd7"/>
+  <path d="M115 390c120-110 285-155 480-105 55 14 99 42 121 80" fill="none" stroke="#d66b42" stroke-width="20" stroke-linecap="round" opacity=".65"/>
+  <ellipse cx="398" cy="307" rx="210" ry="82" fill="#ffd89a" stroke="#8a4a2a" stroke-width="9"/>
+  <path d="M236 294c79 31 237 41 345 0M278 343c70 23 172 25 248 1" fill="none" stroke="#a75d35" stroke-width="8" stroke-linecap="round" opacity=".5"/>
+  <circle cx="315" cy="276" r="24" fill="#e95454" opacity=".85"/>
+  <circle cx="420" cy="292" r="18" fill="#4aa566" opacity=".85"/>
+  <circle cx="505" cy="269" r="22" fill="#e6b83f" opacity=".9"/>
+  <path d="M130 418c145 34 390 42 548 2" fill="none" stroke="#27344d" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+  <text x="400" y="90" text-anchor="middle" font-family="Verdana" font-size="42" font-weight="700" fill="#27344d">Festival Bites</text>
+</svg>

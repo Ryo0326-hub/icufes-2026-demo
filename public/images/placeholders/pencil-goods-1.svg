@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#fff7ed"/>
+  <path d="M318 137l-76 54 45 72 41-25v175h145V238l40 25 45-72-76-54z" fill="#bfdbfe" stroke="#1e3a8a" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M345 198c39 28 78 28 115 0" fill="none" stroke="#2563eb" stroke-width="8" stroke-linecap="round" opacity=".5"/>
+  <text x="400" y="342" text-anchor="middle" font-family="Verdana" font-size="42" font-weight="700" fill="#1e3a8a">ICU</text>
+  <text x="400" y="82" text-anchor="middle" font-family="Verdana" font-size="38" font-weight="700" fill="#0f172a">Festival Tee</text>
+</svg>

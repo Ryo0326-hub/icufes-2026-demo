@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+  <rect width="900" height="560" fill="#08111f"/>
+  <path d="M0 370c120-54 220-58 300-12s171 44 273-8 209-58 327-18v228H0z" fill="#12305d"/>
+  <path d="M210 180v210M360 145v260M520 178v210M675 130v270" stroke="#e0f2fe" stroke-width="9" stroke-linecap="round"/>
+  <path d="M210 180l88 36-88 36z" fill="#f472b6"/>
+  <path d="M360 145l92 42-92 42z" fill="#facc15"/>
+  <path d="M520 178l86 34-86 34z" fill="#67e8f9"/>
+  <path d="M675 130l88 40-88 40z" fill="#86efac"/>
+  <circle cx="280" cy="430" r="28" fill="#f472b6"/>
+  <circle cx="450" cy="430" r="28" fill="#facc15"/>
+  <circle cx="620" cy="430" r="28" fill="#67e8f9"/>
+  <text x="450" y="90" text-anchor="middle" font-family="Verdana" font-size="44" font-weight="700" fill="#e0f2fe">Campus Parade</text>
+</svg>
