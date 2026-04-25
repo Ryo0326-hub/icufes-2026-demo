@@ -28,13 +28,13 @@ export function Modal({ isOpen, title, children, onClose }: ModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/50 p-4 sm:items-center">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/50 px-3 pb-[calc(0.75rem_+_env(safe-area-inset-bottom))] pt-[calc(0.75rem_+_env(safe-area-inset-top))] sm:items-center sm:p-4">
       <button className="absolute inset-0 cursor-default" type="button" aria-label="モーダルを閉じる" onClick={onClose} />
       <section
         aria-modal="true"
         role="dialog"
         aria-label={title}
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-5 shadow-2xl sm:p-6"
+        className="relative max-h-[calc(100dvh_-_1.5rem_-_env(safe-area-inset-top)_-_env(safe-area-inset-bottom))] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-4 shadow-2xl sm:max-h-[90vh] sm:p-6"
       >
         {children}
       </section>

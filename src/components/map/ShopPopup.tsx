@@ -26,22 +26,22 @@ export function ShopPopup({ shop, displayedVotes, onClose, onVote }: ShopPopupPr
   return (
     <Modal isOpen={shop !== null} title={shop?.name ?? "店舗情報"} onClose={onClose}>
       {shop ? (
-        <div className="grid gap-5 md:grid-cols-[220px_1fr]">
+        <div className="grid gap-4 sm:gap-5 md:grid-cols-[220px_1fr]">
           <ImageWithFallback
             src={shop.imageUrl}
             alt={`${shop.name}の画像`}
-            className="h-48 w-full rounded-2xl object-cover md:h-full"
+            className="h-40 w-full rounded-2xl object-cover sm:h-48 md:h-full"
           />
           <div>
             <div className="flex items-start justify-between gap-3">
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm font-bold text-blue-700">#{shop.number}</p>
-                <h2 className="mt-1 text-2xl font-black text-slate-900">{shop.name}</h2>
+                <h2 className="mt-1 text-2xl font-black leading-tight text-slate-900">{shop.name}</h2>
                 <p className="mt-1 text-sm font-semibold text-slate-600">{shop.organization}</p>
               </div>
               <button
                 type="button"
-                className="rounded-full border border-slate-200 px-3 py-1 text-sm font-semibold text-slate-500 hover:bg-slate-50"
+                className="shrink-0 rounded-full border border-slate-200 px-3 py-1 text-sm font-semibold text-slate-500 hover:bg-slate-50"
                 onClick={onClose}
                 aria-label="店舗情報を閉じる"
               >
@@ -69,14 +69,14 @@ export function ShopPopup({ shop, displayedVotes, onClose, onVote }: ShopPopupPr
               </div>
             </dl>
             <p className="mt-4 leading-7 text-slate-700">{shop.description}</p>
-            <div className="mt-5 flex flex-wrap items-center gap-3">
+            <div className="mt-5 grid gap-3 sm:flex sm:flex-wrap sm:items-center">
               <p className="rounded-full bg-blue-50 px-4 py-2 text-sm font-bold text-blue-800">{displayedVotes}票</p>
-              <Button type="button" onClick={() => onVote(shop.id)}>
+              <Button type="button" className="w-full sm:w-auto" onClick={() => onVote(shop.id)}>
                 投票する
               </Button>
               <Link
                 href={`/shops/${shop.id}`}
-                className="rounded-full border border-blue-200 px-5 py-2.5 text-sm font-semibold text-blue-700 hover:bg-blue-50"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-200 px-5 py-2.5 text-sm font-semibold text-blue-700 hover:bg-blue-50 sm:w-auto"
               >
                 詳しく見る
               </Link>

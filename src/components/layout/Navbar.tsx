@@ -13,10 +13,10 @@ const navItems: NavItem[] = [
 export function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-cyan-200/10 bg-slate-950/85 text-white shadow-[0_10px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl">
-      <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex flex-col">
-          <span className="text-lg font-black text-cyan-100">ICU祭 Webサイト</span>
-          <span className="text-xs font-semibold text-slate-400">キャンパスフェスティバルガイド</span>
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
+        <Link href="/" className="min-w-0 flex-1 sm:flex-none">
+          <span className="block truncate text-base font-black text-cyan-100 sm:text-lg">ICU祭 Webサイト</span>
+          <span className="block truncate text-[11px] font-semibold text-slate-400 sm:text-xs">キャンパスフェスティバルガイド</span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex" aria-label="メインナビゲーション">
           {navItems.map((item) => (

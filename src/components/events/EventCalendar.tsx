@@ -49,12 +49,12 @@ export function EventCalendar({ events }: EventCalendarProps) {
 
   return (
     <div className="grid gap-6">
-      <div className="flex flex-wrap gap-3">
+      <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
         {festivalDays.map((day) => (
           <button
             key={day.date}
             type="button"
-            className={`rounded-full border px-5 py-3 text-left transition ${
+            className={`min-h-14 rounded-full border px-5 py-3 text-left transition ${
               selectedDay === day.date
                 ? "border-cyan-200 bg-cyan-300 text-slate-950 shadow-[0_0_34px_rgba(103,232,249,0.35)]"
                 : "border-white/15 bg-white/10 text-white hover:border-cyan-200/70"
@@ -68,21 +68,21 @@ export function EventCalendar({ events }: EventCalendarProps) {
       </div>
 
       <Card className="overflow-hidden border-white/10 bg-white/10 p-0 text-white backdrop-blur">
-        <div className="grid border-b border-white/10 bg-slate-950/60 px-5 py-4 md:grid-cols-[110px_1fr]">
+        <div className="grid border-b border-white/10 bg-slate-950/60 px-4 py-3 sm:px-5 sm:py-4 md:grid-cols-[110px_1fr]">
           <p className="text-sm font-black text-cyan-200">時間</p>
           <p className="hidden text-sm font-black text-cyan-200 md:block">企画</p>
         </div>
         <div className="divide-y divide-white/10">
           {eventsByHour.map((slot) => (
-            <div key={slot.hour} className="grid gap-3 p-4 md:grid-cols-[110px_1fr] md:p-5">
-              <div className="text-xl font-black text-cyan-100">{slot.hour}</div>
+            <div key={slot.hour} className="grid gap-3 p-3 sm:p-4 md:grid-cols-[110px_1fr] md:p-5">
+              <div className="text-lg font-black text-cyan-100 sm:text-xl">{slot.hour}</div>
               <div className="grid gap-3 md:grid-cols-2">
                 {slot.events.length > 0 ? (
                   slot.events.map((event) => (
                     <button
                       key={event.id}
                       type="button"
-                      className="group rounded-2xl border border-white/10 bg-slate-950/55 p-4 text-left transition hover:-translate-y-0.5 hover:border-cyan-200/70 hover:bg-cyan-300/10"
+                      className="group rounded-2xl border border-white/10 bg-slate-950/55 p-3 text-left transition hover:-translate-y-0.5 hover:border-cyan-200/70 hover:bg-cyan-300/10 sm:p-4"
                       onClick={() => setSelectedEventId(event.id)}
                     >
                       <div className="flex flex-wrap items-center gap-2">
@@ -91,7 +91,7 @@ export function EventCalendar({ events }: EventCalendarProps) {
                           {event.startTime} - {event.endTime}
                         </span>
                       </div>
-                      <h3 className="mt-3 text-lg font-black text-white group-hover:text-cyan-100">{event.title}</h3>
+                      <h3 className="mt-3 text-base font-black text-white group-hover:text-cyan-100 sm:text-lg">{event.title}</h3>
                       <p className="mt-1 text-sm font-semibold text-slate-400">{event.location}</p>
                     </button>
                   ))
@@ -108,14 +108,14 @@ export function EventCalendar({ events }: EventCalendarProps) {
         {selectedEvent ? (
           <div>
             <div className="flex items-start justify-between gap-4">
-              <div>
+              <div className="min-w-0">
                 <Badge>{categoryLabels[selectedEvent.category]}</Badge>
-                <h2 className="mt-3 text-3xl font-black text-slate-900">{selectedEvent.title}</h2>
+                <h2 className="mt-3 text-2xl font-black leading-tight text-slate-900 sm:text-3xl">{selectedEvent.title}</h2>
                 <p className="mt-2 font-semibold text-slate-600">{selectedEvent.organization}</p>
               </div>
               <button
                 type="button"
-                className="rounded-full border border-slate-200 px-3 py-1 text-sm font-semibold text-slate-500 hover:bg-slate-50"
+                className="shrink-0 rounded-full border border-slate-200 px-3 py-1 text-sm font-semibold text-slate-500 hover:bg-slate-50"
                 onClick={() => setSelectedEventId(null)}
               >
                 閉じる

@@ -52,11 +52,11 @@ export function ShopRankingCarousel({ shops, getVotes }: ShopRankingCarouselProp
   return (
     <section className="mx-auto w-full max-w-5xl justify-self-center rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur sm:p-6">
       <div className="mb-4 flex items-center justify-between gap-3">
-        <div>
+        <div className="min-w-0">
           <p className="text-sm font-bold text-cyan-200">ランキング</p>
-          <h2 className="text-2xl font-black text-white">人気のお店ランキング トップ5</h2>
+          <h2 className="text-xl font-black leading-tight text-white sm:text-2xl">人気のお店ランキング トップ5</h2>
         </div>
-        <div className="flex gap-2">
+        <div className="hidden gap-2 sm:flex">
           <Button type="button" variant="secondary" className="px-3" onClick={() => scrollByCard("left")} aria-label="ランキングを左に移動">
             ←
           </Button>
@@ -65,14 +65,14 @@ export function ShopRankingCarousel({ shops, getVotes }: ShopRankingCarouselProp
           </Button>
         </div>
       </div>
-      <div ref={scrollRef} className="flex snap-x gap-4 overflow-x-auto pb-2">
+      <div ref={scrollRef} className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-2 sm:mx-0 sm:gap-4 sm:px-0">
         {topShops.map((shop, index) => {
           const style = index === 0 ? firstPlaceStyle : glassStyle;
 
           return (
           <Card
             key={shop.id}
-            className={`relative min-w-[82%] snap-start overflow-hidden p-4 sm:min-w-[45%] lg:min-w-[30%] xl:min-w-[24%] ${style.card}`}
+            className={`relative min-w-[88%] snap-start overflow-hidden p-4 sm:min-w-[45%] lg:min-w-[30%] xl:min-w-[24%] ${style.card}`}
           >
             {index === 0 ? (
               <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-amber-200/20 blur-2xl" />
@@ -87,12 +87,12 @@ export function ShopRankingCarousel({ shops, getVotes }: ShopRankingCarouselProp
             </div>
             <div className="relative mt-4">
               <Badge className={style.category}>{categoryLabels[shop.category]}</Badge>
-              <h3 className="mt-3 text-lg font-black text-white">{shop.name}</h3>
-              <p className="mt-1 text-sm font-semibold text-slate-300">{shop.organization}</p>
+              <h3 className="mt-3 text-base font-black leading-tight text-white sm:text-lg">{shop.name}</h3>
+              <p className="mt-1 truncate text-sm font-semibold text-slate-300">{shop.organization}</p>
               <p className={`mt-3 text-sm font-bold ${style.votes}`}>{getVotes(shop)}票</p>
               <Link
                 href={`/shops/${shop.id}`}
-                className={`mt-4 inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition ${style.link}`}
+                className={`mt-4 inline-flex min-h-10 items-center justify-center rounded-full border px-4 py-2 text-sm font-semibold transition ${style.link}`}
               >
                 詳しく見る
               </Link>

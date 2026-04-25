@@ -53,7 +53,7 @@ export function ShopList({ shops }: ShopListProps) {
       <div className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 md:grid-cols-[1fr_auto_auto_auto]">
         <SearchInput placeholder="お店名・団体名で検索" value={query} onChange={(event) => setQuery(event.target.value)} />
         <select
-          className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700"
+          className="min-h-11 w-full rounded-full border border-slate-200 bg-white px-4 py-2.5 text-base font-semibold text-slate-700 md:w-auto md:text-sm"
           value={category}
           onChange={(event) => setCategory(event.target.value as ShopCategory | "All")}
           aria-label="カテゴリで絞り込み"
@@ -65,7 +65,7 @@ export function ShopList({ shops }: ShopListProps) {
           ))}
         </select>
         <select
-          className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700"
+          className="min-h-11 w-full rounded-full border border-slate-200 bg-white px-4 py-2.5 text-base font-semibold text-slate-700 md:w-auto md:text-sm"
           value={areaId}
           onChange={(event) => setAreaId(event.target.value)}
           aria-label="エリアで絞り込み"
@@ -78,7 +78,7 @@ export function ShopList({ shops }: ShopListProps) {
           ))}
         </select>
         <select
-          className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700"
+          className="min-h-11 w-full rounded-full border border-slate-200 bg-white px-4 py-2.5 text-base font-semibold text-slate-700 md:w-auto md:text-sm"
           value={sortKey}
           onChange={(event) => setSortKey(event.target.value as SortKey)}
           aria-label="並び替え"

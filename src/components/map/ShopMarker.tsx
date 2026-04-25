@@ -25,7 +25,7 @@ export function ShopMarker({ shop, onClick, isActive = false, color = defaultCol
   return (
     <button
       type="button"
-      className="absolute z-20 flex h-5 w-5 items-center justify-center rounded-full text-[8px] font-black shadow-md transition hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:h-6 sm:w-6 sm:text-[10px]"
+      className="absolute z-20 flex h-6 w-6 items-center justify-center rounded-full text-[9px] font-black shadow-md transition hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:h-6 sm:w-6 sm:text-[10px]"
       style={{
         left: `${shop.marker.x}%`,
         top: `${shop.marker.y}%`,

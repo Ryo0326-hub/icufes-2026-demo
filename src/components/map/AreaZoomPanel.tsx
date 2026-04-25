@@ -11,7 +11,7 @@ type AreaZoomPanelProps = {
 
 export function AreaZoomPanel({ area, shops, onSelectShop, activeShopId = null }: AreaZoomPanelProps) {
   return (
-    <div className="relative h-[420px] w-full overflow-hidden rounded-2xl border border-cyan-200/20 bg-white sm:h-[520px]">
+    <div className="relative h-[320px] w-full overflow-hidden rounded-2xl border border-cyan-200/20 bg-white sm:h-[520px]">
       <img
         src="/images/map/full-campus-map.png"
         alt="Zoomed ICU campus map"

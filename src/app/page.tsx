@@ -15,25 +15,25 @@ export default function HomePage() {
   return (
     <div className="bg-[linear-gradient(180deg,#020617_0%,#030712_48%,#000_100%)] text-white">
       <section
-        className="relative min-h-[92vh] overflow-hidden bg-cover bg-center text-white"
+        className="relative min-h-[calc(100dvh_-_4.25rem)] overflow-hidden bg-cover bg-center text-white lg:min-h-[92vh]"
         style={{ backgroundImage: "url('/images/backgrounds/background-image1.png')" }}
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.1),rgba(2,6,23,0.35)_34%,rgba(0,0,0,0.82)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#020617] to-transparent" />
-        <div className="relative mx-auto grid min-h-[92vh] max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8">
+        <div className="relative mx-auto grid min-h-[calc(100dvh_-_4.25rem)] max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:min-h-[92vh] lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8">
           <div className="max-w-4xl">
-            <p className="translate-x-8 text-sm font-bold uppercase tracking-[0.35em] text-cyan-100 sm:translate-x-10">国際基督教大学祭</p>
-            <h1 className="mt-6 translate-x-8 text-6xl font-black leading-none tracking-tight text-white drop-shadow-2xl sm:translate-x-10 sm:text-7xl lg:text-8xl">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-100 sm:translate-x-10 sm:text-sm sm:tracking-[0.35em]">国際基督教大学祭</p>
+            <h1 className="mt-5 text-5xl font-black leading-none tracking-tight text-white drop-shadow-2xl sm:mt-6 sm:translate-x-10 sm:text-7xl lg:text-8xl">
               ICU祭 2026
             </h1>
-            <p className="mt-5 max-w-2xl translate-x-8 text-base leading-8 text-slate-200 sm:translate-x-10 sm:text-lg">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-slate-200 sm:translate-x-10 sm:text-lg">
               星降るキャンパスで、まだ知らない物語に出会おう。
             </p>
-            <div className="mt-10 flex translate-x-8 flex-wrap gap-4 sm:translate-x-10">
-              <ButtonLink href="/shops" className="bg-cyan-300 px-7 py-3 text-slate-950 shadow-[0_0_36px_rgba(103,232,249,0.45)] hover:bg-cyan-200">
+            <div className="mt-8 grid gap-3 sm:mt-10 sm:flex sm:translate-x-10 sm:flex-wrap sm:gap-4">
+              <ButtonLink href="/shops" className="w-full bg-cyan-300 px-7 py-3 text-slate-950 shadow-[0_0_36px_rgba(103,232,249,0.45)] hover:bg-cyan-200 sm:w-auto">
                 お店を探す
               </ButtonLink>
-              <ButtonLink href="/events" variant="secondary" className="border-white/30 bg-white/10 px-7 py-3 text-white backdrop-blur hover:bg-white/20">
+              <ButtonLink href="/events" variant="secondary" className="w-full border-white/30 bg-white/10 px-7 py-3 text-white backdrop-blur hover:bg-white/20 sm:w-auto">
                 企画を見る
               </ButtonLink>
             </div>
@@ -59,7 +59,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:gap-10 lg:px-8">
         <div className="relative">
           <img
             src="/images/stickers/mascot-hanging.png"
@@ -78,7 +78,7 @@ export default function HomePage() {
           <div className="mb-4 flex items-end justify-between gap-3">
             <div>
               <p className="text-sm font-bold text-cyan-200">注目企画</p>
-              <h2 className="text-3xl font-black text-white">注目企画</h2>
+              <h2 className="text-2xl font-black text-white sm:text-3xl">注目企画</h2>
             </div>
             <Link href="/events" className="text-sm font-bold text-cyan-200">
               すべて見る
@@ -95,7 +95,7 @@ export default function HomePage() {
           <div className="mb-4 flex items-end justify-between gap-3">
             <div>
               <p className="text-sm font-bold text-cyan-200">公式グッズ</p>
-              <h2 className="text-3xl font-black text-white">公式グッズ</h2>
+              <h2 className="text-2xl font-black text-white sm:text-3xl">公式グッズ</h2>
             </div>
             <Link href="/goods" className="text-sm font-bold text-cyan-200">
               グッズを見る
@@ -111,7 +111,7 @@ export default function HomePage() {
         <section className="grid gap-5 lg:grid-cols-[1fr_1fr]">
           <Card className="border-white/15 bg-white/10 text-white shadow-[0_0_30px_rgba(148,163,184,0.12)] backdrop-blur">
             <Badge className="bg-cyan-100/12 text-cyan-50">アクセス</Badge>
-            <h2 className="mt-3 text-2xl font-black text-white">ICUへのアクセス</h2>
+            <h2 className="mt-3 text-xl font-black text-white sm:text-2xl">ICUへのアクセス</h2>
             <p className="mt-3 leading-7 text-slate-300">三鷹駅・武蔵境駅からバスでアクセスできます。公共交通機関の利用をおすすめします。</p>
             <Link href="/access" className="mt-4 inline-block text-sm font-bold text-cyan-50">
               アクセス情報へ
@@ -119,7 +119,7 @@ export default function HomePage() {
           </Card>
           <Card className="border-white/15 bg-white/10 text-white shadow-[0_0_30px_rgba(148,163,184,0.12)] backdrop-blur">
             <Badge className="bg-cyan-100/12 text-cyan-50">お知らせ</Badge>
-            <h2 className="mt-3 text-2xl font-black text-white">最新のお知らせ</h2>
+            <h2 className="mt-3 text-xl font-black text-white sm:text-2xl">最新のお知らせ</h2>
             <div className="mt-4 grid gap-3">
               {news.slice(0, 3).map((item) => (
                 <Link key={item.id} href="/news" className="rounded-xl bg-slate-950/50 p-3 hover:bg-cyan-300/10">

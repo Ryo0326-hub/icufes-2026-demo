@@ -43,7 +43,7 @@ export function EventFilters({ events }: EventFiltersProps) {
       <div className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 md:grid-cols-[1fr_auto_auto]">
         <SearchInput placeholder="企画名・団体名で検索" value={query} onChange={(event) => setQuery(event.target.value)} />
         <select
-          className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700"
+          className="min-h-11 w-full rounded-full border border-slate-200 bg-white px-4 py-2.5 text-base font-semibold text-slate-700 md:w-auto md:text-sm"
           value={category}
           onChange={(event) => setCategory(event.target.value as EventCategory | "All")}
           aria-label="カテゴリで絞り込み"
@@ -55,7 +55,7 @@ export function EventFilters({ events }: EventFiltersProps) {
           ))}
         </select>
         <select
-          className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700"
+          className="min-h-11 w-full rounded-full border border-slate-200 bg-white px-4 py-2.5 text-base font-semibold text-slate-700 md:w-auto md:text-sm"
           value={time}
           onChange={(event) => setTime(event.target.value)}
           aria-label="時間帯で絞り込み"

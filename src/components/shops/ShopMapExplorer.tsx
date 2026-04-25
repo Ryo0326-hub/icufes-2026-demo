@@ -132,6 +132,7 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
           <Button
             type="button"
             variant="secondary"
+            className="w-full sm:w-auto"
             onClick={() => {
               setShowAreaOverlays(false);
               setIsZooming(true);
@@ -147,9 +148,9 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
         ) : null}
       </div>
 
-      <section className="grid gap-8 rounded-[2.5rem] border border-white/10 bg-white/10 p-5 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur xl:grid-cols-[minmax(0,1fr)_480px] 2xl:grid-cols-[minmax(0,1fr)_540px]">
+      <section className="grid gap-6 rounded-[1.5rem] border border-white/10 bg-white/10 p-3 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur sm:rounded-[2rem] sm:p-5 xl:grid-cols-[minmax(0,1fr)_480px] xl:gap-8 2xl:grid-cols-[minmax(0,1fr)_540px]">
         <div>
-          <div className="relative h-[420px] w-full overflow-hidden border border-white/10 bg-white sm:h-[520px] lg:h-[560px] xl:h-[610px]">
+          <div className="relative h-[320px] w-full overflow-hidden rounded-2xl border border-white/10 bg-white sm:h-[520px] lg:h-[560px] xl:h-[610px]">
             <div className="absolute left-0 top-0 w-full origin-top-left transition-transform duration-700 ease-out" style={{ transform: mapTransform }}>
               <img src="/images/map/full-campus-map.png" alt="ICUキャンパスマップ" className="w-full" />
               {selectedArea
@@ -165,9 +166,9 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
                 : null}
               {popupShop && selectedArea ? (
                 <div
-                  className="absolute z-30 w-64 rounded-3xl border border-white/25 bg-slate-950/95 p-4 text-white shadow-[0_18px_45px_rgba(0,0,0,0.4)] backdrop-blur"
+                  className="absolute z-30 w-56 max-w-[calc(100vw_-_2rem)] rounded-2xl border border-white/25 bg-slate-950/95 p-3 text-white shadow-[0_18px_45px_rgba(0,0,0,0.4)] backdrop-blur sm:w-64 sm:rounded-3xl sm:p-4"
                   style={{
-                    left: `${popupShop.marker.x}%`,
+                    left: `clamp(7rem, ${popupShop.marker.x}%, calc(100% - 7rem))`,
                     top: `${popupShop.marker.y}%`,
                     transform: `translate(-50%, 18px) scale(${1 / selectedArea.zoom.scale})`,
                     transformOrigin: "top center"
@@ -179,12 +180,12 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
                   />
                   <div className="relative">
                     <div className="flex items-start justify-between gap-3">
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-xs font-black" style={{ color: selectedArea.color.markerHover }}>
                           #{popupShop.number}
                         </p>
-                        <h3 className="mt-1 text-base font-black leading-tight">{popupShop.name}</h3>
-                        <p className="mt-1 text-xs font-semibold text-slate-400">{popupShop.organization}</p>
+                        <h3 className="mt-1 line-clamp-2 text-sm font-black leading-tight sm:text-base">{popupShop.name}</h3>
+                        <p className="mt-1 truncate text-xs font-semibold text-slate-400">{popupShop.organization}</p>
                       </div>
                       <button
                         type="button"
@@ -235,7 +236,7 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
           </div>
         </div>
 
-        <aside className="p-1 sm:p-2">
+        <aside className="min-w-0 p-1 sm:p-2">
           <form className="relative mb-7 grid gap-4" onSubmit={handleSearchSubmit}>
             <div className="relative">
               <SearchInput
@@ -262,10 +263,10 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
                         setIsSuggesting(false);
                       }}
                     >
-                      <span>
+                      <span className="min-w-0 truncate">
                         <span className="font-black text-cyan-200">#{shop.number}</span> {shop.name}
                       </span>
-                      <span className="text-xs text-slate-400">{shop.organization}</span>
+                      <span className="max-w-[38%] shrink-0 truncate text-xs text-slate-400">{shop.organization}</span>
                     </button>
                   ))}
                 </div>
@@ -280,7 +281,7 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
               <button
                 key={filter.id}
                 type="button"
-                className={`rounded-full border px-4 py-2 text-sm font-bold transition ${
+                className={`min-h-10 rounded-full border px-4 py-2 text-sm font-bold transition ${
                   activeFilter === filter.id
                     ? "border-cyan-200 bg-cyan-300 text-slate-950"
                     : "border-white/15 bg-slate-950/45 text-slate-200 hover:border-cyan-200/70 hover:text-cyan-100"
@@ -296,8 +297,8 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
             ))}
           </div>
           <p className="text-sm font-bold text-cyan-200">{selectedArea ? `このエリアに${visibleShops.length}店舗` : "エリアを選択"}</p>
-          <h3 className="mt-2 text-2xl font-black text-white">{selectedArea ? "このエリアのお店" : "エリアを選択してください"}</h3>
-          <div className="mt-5 grid max-h-[820px] gap-4 overflow-y-auto px-1 py-2">
+          <h3 className="mt-2 text-xl font-black text-white sm:text-2xl">{selectedArea ? "このエリアのお店" : "エリアを選択してください"}</h3>
+          <div className="mt-5 grid max-h-[70dvh] gap-4 overflow-y-auto px-1 py-2 xl:max-h-[820px]">
             {visibleShops.map((shop) => (
               <button
                 key={shop.id}
@@ -310,12 +311,12 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
                 onClick={() => handleSelectShop(shop)}
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs font-black text-cyan-200">#{shop.number}</p>
-                    <p className="mt-1 font-black text-white">{shop.name}</p>
-                    <p className="mt-1 text-xs font-semibold text-slate-400">{shop.organization}</p>
+                    <p className="mt-1 line-clamp-2 font-black text-white">{shop.name}</p>
+                    <p className="mt-1 truncate text-xs font-semibold text-slate-400">{shop.organization}</p>
                   </div>
-                  <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-bold text-blue-100">{shop.locationLabel}</span>
+                  <span className="shrink-0 rounded-full bg-blue-500/20 px-3 py-1 text-xs font-bold text-blue-100">{shop.locationLabel}</span>
                 </div>
                 <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-300">{shop.description}</p>
                 <p className="mt-3 text-xs font-bold text-cyan-200">{getVotes(shop)}票</p>

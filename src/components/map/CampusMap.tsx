@@ -39,18 +39,19 @@ export function CampusMap({ shops, mapAreas }: CampusMapProps) {
   }
 
   return (
-    <div className="grid gap-8">
-      <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft sm:p-6">
+    <div className="grid gap-6 sm:gap-8">
+      <section className="rounded-2xl border border-slate-200 bg-white p-3 shadow-soft sm:rounded-3xl sm:p-6">
         <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <Badge>インタラクティブマップ</Badge>
             <h1 className="mt-3 text-3xl font-black text-slate-900 md:text-4xl">キャンパスマップ</h1>
-            <p className="mt-2 text-slate-600">マップのエリアをクリックして、お店を探してみましょう。</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">マップのエリアをクリックして、お店を探してみましょう。</p>
           </div>
           {selectedArea ? (
             <Button
               type="button"
               variant="secondary"
+              className="w-full md:w-auto"
               onClick={() => {
                 setSelectedAreaId(null);
                 setSelectedShopId(null);
@@ -70,11 +71,11 @@ export function CampusMap({ shops, mapAreas }: CampusMapProps) {
             <AreaZoomPanel area={selectedArea} shops={visibleShops} onSelectShop={(shop) => setSelectedShopId(shop.id)} />
           </div>
         ) : (
-          <div className="relative mx-auto w-full max-w-6xl">
+          <div className="relative mx-auto w-full max-w-6xl overflow-hidden rounded-2xl border border-slate-200">
             <img
               src="/images/map/full-campus-map.png"
               alt="ICUキャンパスマップ"
-              className="w-full rounded-2xl border border-slate-200"
+              className="w-full"
             />
             {mapAreas.map((area) => (
               <MapAreaOverlay key={area.id} area={area} onSelect={setSelectedAreaId} />

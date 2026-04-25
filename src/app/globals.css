@@ -13,6 +13,7 @@ html {
   scroll-behavior: smooth;
   background: #020617;
   overscroll-behavior-y: none;
+  overflow-x: hidden;
 }
 
 body {
@@ -23,6 +24,7 @@ body {
     #020617;
   color: #f8fafc;
   overscroll-behavior-y: none;
+  overflow-x: hidden;
 }
 
 a {
