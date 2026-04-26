@@ -50,7 +50,7 @@ export function ShopRankingCarousel({ shops, getVotes }: ShopRankingCarouselProp
   }
 
   return (
-    <section className="mx-auto w-full max-w-5xl justify-self-center rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur sm:p-6">
+    <section className="mx-auto w-full min-w-0 max-w-full justify-self-center rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur sm:max-w-5xl sm:p-6">
       <div className="mb-4 flex items-center justify-between gap-3">
         <div className="min-w-0">
           <p className="text-sm font-bold text-cyan-200">ランキング</p>
@@ -65,14 +65,14 @@ export function ShopRankingCarousel({ shops, getVotes }: ShopRankingCarouselProp
           </Button>
         </div>
       </div>
-      <div ref={scrollRef} className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-2 sm:mx-0 sm:gap-4 sm:px-0">
+      <div ref={scrollRef} className="flex min-w-0 snap-x gap-3 overflow-x-auto pb-2 sm:gap-4">
         {topShops.map((shop, index) => {
           const style = index === 0 ? firstPlaceStyle : glassStyle;
 
           return (
           <Card
             key={shop.id}
-            className={`relative min-w-[88%] snap-start overflow-hidden p-4 sm:min-w-[45%] lg:min-w-[30%] xl:min-w-[24%] ${style.card}`}
+            className={`relative min-w-full snap-start overflow-hidden p-4 sm:min-w-[45%] lg:min-w-[30%] xl:min-w-[24%] ${style.card}`}
           >
             {index === 0 ? (
               <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-amber-200/20 blur-2xl" />
@@ -87,7 +87,7 @@ export function ShopRankingCarousel({ shops, getVotes }: ShopRankingCarouselProp
             </div>
             <div className="relative mt-4">
               <Badge className={style.category}>{categoryLabels[shop.category]}</Badge>
-              <h3 className="mt-3 text-base font-black leading-tight text-white sm:text-lg">{shop.name}</h3>
+              <h3 className="mt-3 break-words text-base font-black leading-tight text-white sm:text-lg">{shop.name}</h3>
               <p className="mt-1 truncate text-sm font-semibold text-slate-300">{shop.organization}</p>
               <p className={`mt-3 text-sm font-bold ${style.votes}`}>{getVotes(shop)}票</p>
               <Link

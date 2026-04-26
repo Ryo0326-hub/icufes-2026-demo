@@ -11,11 +11,11 @@ type AreaZoomPanelProps = {
 
 export function AreaZoomPanel({ area, shops, onSelectShop, activeShopId = null }: AreaZoomPanelProps) {
   return (
-    <div className="relative h-[320px] w-full overflow-hidden rounded-2xl border border-cyan-200/20 bg-white sm:h-[520px]">
+    <div className="relative aspect-[1477/1065] w-full overflow-hidden rounded-2xl border border-cyan-200/20 bg-white">
       <img
         src="/images/map/full-campus-map.png"
         alt="Zoomed ICU campus map"
-        className="absolute left-0 top-0 w-full origin-top-left"
+        className="absolute inset-0 h-full w-full origin-top-left object-contain"
         style={{
           transform: `scale(${area.zoom.scale}) translate(${area.zoom.translateX}%, ${area.zoom.translateY}%)`
         }}
@@ -27,7 +27,7 @@ export function AreaZoomPanel({ area, shops, onSelectShop, activeShopId = null }
         }}
       >
         {shops.map((shop) => (
-          <ShopMarker key={shop.id} shop={shop} onClick={onSelectShop} isActive={shop.id === activeShopId} color={area.color} />
+          <ShopMarker key={shop.id} shop={shop} onClick={onSelectShop} isActive={shop.id === activeShopId} zoomScale={area.zoom.scale} color={area.color} />
         ))}
       </div>
     </div>

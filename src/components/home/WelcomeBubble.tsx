@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const greetings = [
   "ようこそ",
@@ -11,7 +12,14 @@ const greetings = [
   "Hoş geldiniz"
 ];
 
-export function WelcomeBubble() {
+type WelcomeBubbleProps = {
+  className?: string;
+  textClassName?: string;
+  tailClassName?: string;
+  tailInnerClassName?: string;
+};
+
+export function WelcomeBubble({ className, textClassName, tailClassName, tailInnerClassName }: WelcomeBubbleProps) {
   const [index, setIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
@@ -28,13 +36,15 @@ export function WelcomeBubble() {
   }, []);
 
   return (
-    <div className="relative inline-block min-w-40 max-w-96 rounded-[2rem] border-[4px] border-slate-950 bg-white px-6 py-4 text-slate-950 shadow-[0_18px_42px_rgba(0,0,0,0.38)]">
-      <div className="absolute -bottom-4 left-4 h-6 w-7 rotate-[18deg] bg-slate-950 [clip-path:polygon(0_0,100%_18%,18%_100%)]" />
-      <div className="absolute -bottom-[13px] left-[19px] h-5 w-6 rotate-[18deg] bg-white [clip-path:polygon(0_0,100%_18%,18%_100%)]" />
+    <div className={cn("relative inline-block min-w-40 max-w-96 rounded-[2rem] border-[4px] border-slate-950 bg-white px-6 py-4 text-slate-950 shadow-[0_18px_42px_rgba(0,0,0,0.38)]", className)}>
+      <div className={cn("absolute -bottom-4 left-4 h-6 w-7 rotate-[18deg] bg-slate-950 [clip-path:polygon(0_0,100%_18%,18%_100%)]", tailClassName)} />
+      <div className={cn("absolute -bottom-[13px] left-[19px] h-5 w-6 rotate-[18deg] bg-white [clip-path:polygon(0_0,100%_18%,18%_100%)]", tailInnerClassName)} />
       <p
-        className={`relative text-center text-2xl font-black leading-tight tracking-tight transition-opacity duration-300 sm:text-3xl ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
+        className={cn(
+          "relative text-center text-2xl font-black leading-tight tracking-tight transition-opacity duration-300 sm:text-3xl",
+          isVisible ? "opacity-100" : "opacity-0",
+          textClassName
+        )}
       >
         {greetings[index]}
       </p>

@@ -19,8 +19,7 @@ export default function NewsPage() {
     >
       <div className="mx-auto max-w-5xl">
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm font-bold text-cyan-200">お知らせ</p>
-          <h1 className="mt-2 text-3xl font-black text-white sm:text-4xl">お知らせ</h1>
+          <h1 className="text-sm font-bold text-cyan-200">お知らせ</h1>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">開催情報、雨天時対応、落とし物情報、グッズ販売情報などを掲載します。</p>
         </div>
         <div className="grid gap-4">

@@ -10,10 +10,10 @@ export function Footer() {
             キャンパスを歩きながら、お店・企画・グッズを見つけるためのデモWebサイトです。
           </p>
         </div>
-        <div className="flex flex-col gap-2 font-semibold text-cyan-200 sm:flex-row sm:flex-wrap sm:gap-3">
-          <Link className="py-1" href="/about">ICU祭について</Link>
-          <Link className="py-1" href="/access">アクセス</Link>
-          <Link className="py-1" href="/news">お知らせ</Link>
+        <div className="flex flex-nowrap items-center gap-3 text-xs font-semibold text-cyan-200 sm:flex-wrap sm:text-sm">
+          <Link className="whitespace-nowrap py-1" href="/about">ICU祭について</Link>
+          <Link className="whitespace-nowrap py-1" href="/access">アクセス</Link>
+          <Link className="whitespace-nowrap py-1" href="/news">お知らせ</Link>
         </div>
       </div>
     </footer>

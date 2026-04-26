@@ -20,8 +20,21 @@ export default function HomePage() {
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.1),rgba(2,6,23,0.35)_34%,rgba(0,0,0,0.82)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#020617] to-transparent" />
-        <div className="relative mx-auto grid min-h-[calc(100dvh_-_4.25rem)] max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:min-h-[92vh] lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8">
+        <div className="relative mx-auto grid min-h-[calc(100dvh_-_4.25rem)] max-w-7xl items-start gap-10 px-4 pb-14 pt-5 sm:px-6 sm:pb-20 sm:pt-8 lg:min-h-[92vh] lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center lg:px-8 lg:py-20">
           <div className="max-w-4xl">
+            <div className="mx-auto mb-5 grid w-fit justify-items-center lg:hidden">
+              <WelcomeBubble
+                className="min-w-28 rounded-2xl border-[3px] px-4 py-2"
+                textClassName="text-lg sm:text-xl"
+                tailClassName="-bottom-8 left-auto right-2 h-10 w-7 rotate-[24deg] rounded-b-full rounded-t-sm [clip-path:none]"
+                tailInnerClassName="-bottom-[27px] left-auto right-[13px] h-9 w-5 rotate-[24deg] rounded-b-full rounded-t-sm [clip-path:none]"
+              />
+              <img
+                src="/images/stickers/mascot-neutral.png"
+                alt="ICU祭マスコット"
+                className="mt-1 w-28 drop-shadow-[0_18px_34px_rgba(0,0,0,0.55)] sm:w-32"
+              />
+            </div>
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-100 sm:translate-x-10 sm:text-sm sm:tracking-[0.35em]">国際基督教大学祭</p>
             <h1 className="mt-5 text-5xl font-black leading-none tracking-tight text-white drop-shadow-2xl sm:mt-6 sm:translate-x-10 sm:text-7xl lg:text-8xl">
               ICU祭 2026
@@ -44,12 +57,12 @@ export default function HomePage() {
             </div>
             <div className="group absolute -bottom-0 right-60 z-10 w-[300px]">
               <img
-                src="/images/stickers/mascot-focused.png"
+                src="/images/stickers/mascot-neutral.png"
                 alt="ICU祭マスコット"
                 className="w-full drop-shadow-[0_28px_55px_rgba(0,0,0,0.62)] transition-opacity duration-200 group-hover:opacity-0"
               />
               <img
-                src="/images/stickers/mascot-joy.png"
+                src="/images/stickers/mascot-joy2.png"
                 alt=""
                 aria-hidden="true"
                 className="absolute inset-0 w-full opacity-0 drop-shadow-[0_28px_55px_rgba(0,0,0,0.62)] transition-opacity duration-200 group-hover:opacity-100"
@@ -59,8 +72,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:gap-10 lg:px-8">
-        <div className="relative">
+      <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:gap-10 lg:px-8">
+        <div className="relative min-w-0 max-w-full">
           <img
             src="/images/stickers/mascot-hanging.png"
             alt="ICU祭のぶら下がりマスコット"
@@ -74,57 +87,55 @@ export default function HomePage() {
           <ShopRankingPreview shops={shops} />
         </div>
 
-        <section>
-          <div className="mb-4 flex items-end justify-between gap-3">
-            <div>
-              <p className="text-sm font-bold text-cyan-200">注目企画</p>
-              <h2 className="text-2xl font-black text-white sm:text-3xl">注目企画</h2>
+        <section className="mx-auto w-full min-w-0 max-w-full justify-self-center rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur sm:max-w-5xl sm:p-6">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <h2 className="text-sm font-bold text-cyan-200">注目企画</h2>
             </div>
-            <Link href="/events" className="text-sm font-bold text-cyan-200">
+            <Link href="/events" className="shrink-0 text-sm font-bold text-cyan-200">
               すべて見る
             </Link>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="flex min-w-0 snap-x gap-3 overflow-x-auto pb-2 sm:gap-4">
             {events.slice(0, 3).map((event) => (
-              <EventCard key={event.id} event={event} />
+              <EventCard key={event.id} event={event} variant="ranking" />
             ))}
           </div>
         </section>
 
-        <section>
-          <div className="mb-4 flex items-end justify-between gap-3">
-            <div>
-              <p className="text-sm font-bold text-cyan-200">公式グッズ</p>
-              <h2 className="text-2xl font-black text-white sm:text-3xl">公式グッズ</h2>
+        <section className="mx-auto w-full min-w-0 max-w-full justify-self-center rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur sm:max-w-5xl sm:p-6">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <h2 className="text-sm font-bold text-cyan-200">公式グッズ</h2>
             </div>
-            <Link href="/goods" className="text-sm font-bold text-cyan-200">
+            <Link href="/goods" className="shrink-0 text-sm font-bold text-cyan-200">
               グッズを見る
             </Link>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="flex min-w-0 snap-x gap-3 overflow-x-auto pb-2 sm:gap-4">
             {goods.map((item) => (
-              <GoodsCard key={item.id} item={item} />
+              <GoodsCard key={item.id} item={item} variant="ranking" />
             ))}
           </div>
         </section>
 
-        <section className="grid gap-5 lg:grid-cols-[1fr_1fr]">
+        <section className="grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <Card className="border-white/15 bg-white/10 text-white shadow-[0_0_30px_rgba(148,163,184,0.12)] backdrop-blur">
             <Badge className="bg-cyan-100/12 text-cyan-50">アクセス</Badge>
-            <h2 className="mt-3 text-xl font-black text-white sm:text-2xl">ICUへのアクセス</h2>
-            <p className="mt-3 leading-7 text-slate-300">三鷹駅・武蔵境駅からバスでアクセスできます。公共交通機関の利用をおすすめします。</p>
+            <h2 className="mt-3 break-words text-xl font-black text-white sm:text-2xl">ICUへのアクセス</h2>
+            <p className="mt-3 break-words leading-7 text-slate-300">三鷹駅・武蔵境駅からバスでアクセスできます。公共交通機関の利用をおすすめします。</p>
             <Link href="/access" className="mt-4 inline-block text-sm font-bold text-cyan-50">
               アクセス情報へ
             </Link>
           </Card>
           <Card className="border-white/15 bg-white/10 text-white shadow-[0_0_30px_rgba(148,163,184,0.12)] backdrop-blur">
             <Badge className="bg-cyan-100/12 text-cyan-50">お知らせ</Badge>
-            <h2 className="mt-3 text-xl font-black text-white sm:text-2xl">最新のお知らせ</h2>
+            <h2 className="mt-3 break-words text-xl font-black text-white sm:text-2xl">最新のお知らせ</h2>
             <div className="mt-4 grid gap-3">
               {news.slice(0, 3).map((item) => (
-                <Link key={item.id} href="/news" className="rounded-xl bg-slate-950/50 p-3 hover:bg-cyan-300/10">
+                <Link key={item.id} href="/news" className="min-w-0 rounded-xl bg-slate-950/50 p-3 hover:bg-cyan-300/10">
                   <p className="text-xs font-bold text-cyan-200">{item.date}</p>
-                  <p className="mt-1 text-sm font-bold text-white">{item.title}</p>
+                  <p className="mt-1 break-words text-sm font-bold text-white">{item.title}</p>
                 </Link>
               ))}
             </div>

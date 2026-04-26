@@ -4,6 +4,7 @@ type ShopMarkerProps = {
   shop: Shop;
   onClick: (shop: Shop) => void;
   isActive?: boolean;
+  zoomScale?: number;
   color?: {
     marker: string;
     markerHover: string;
@@ -21,23 +22,46 @@ const defaultColor = {
   shadow: "rgba(37, 99, 235, 0.45)"
 };
 
-export function ShopMarker({ shop, onClick, isActive = false, color = defaultColor }: ShopMarkerProps) {
+const pawImageByMarkerColor: Record<string, string> = {
+  "#22d3ee": "/images/map/blue-paw.png",
+  "#34d399": "/images/map/green-paw.png",
+  "#fb7185": "/images/map/red-paw.png"
+};
+
+export function ShopMarker({ shop, onClick, isActive = false, zoomScale = 1, color = defaultColor }: ShopMarkerProps) {
+  const pawImage = pawImageByMarkerColor[color.marker];
+  const hitAreaClasses = "h-12 w-12 sm:h-14 sm:w-14 lg:h-28 lg:w-28";
+  const pawSizeClasses = "h-full w-full";
+  const markerScale = 1 / zoomScale;
+
   return (
     <button
       type="button"
-      className="absolute z-20 flex h-6 w-6 items-center justify-center rounded-full text-[9px] font-black shadow-md transition hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:h-6 sm:w-6 sm:text-[10px]"
+      className={`absolute z-20 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-1 ${hitAreaClasses} ${
+        pawImage ? "bg-transparent p-0" : "rounded-full text-[6px] font-black shadow-sm transition hover:scale-125 sm:text-[8px] lg:text-[10px]"
+      }`}
       style={{
         left: `${shop.marker.x}%`,
         top: `${shop.marker.y}%`,
-        transform: "translate(-50%, -50%)",
-        backgroundColor: isActive ? color.markerHover : color.marker,
+        transform: `translate(-50%, -50%) scale(${markerScale})`,
+        transformOrigin: "center",
+        backgroundColor: pawImage ? "transparent" : isActive ? color.markerHover : color.marker,
         color: color.text,
-        boxShadow: isActive ? `0 0 0 4px ${color.ring}, 0 0 18px ${color.shadow}` : `0 0 12px ${color.shadow}`
+        boxShadow: pawImage ? "none" : isActive ? `0 0 0 2px ${color.ring}, 0 0 10px ${color.shadow}` : `0 0 8px ${color.shadow}`
       }}
       onClick={() => onClick(shop)}
       aria-label={`店舗番号${shop.number}: ${shop.name}を表示`}
+      title={shop.name}
     >
-      {shop.number}
+      {pawImage ? (
+        <img
+          src={pawImage}
+          alt=""
+          aria-hidden="true"
+          className={`pointer-events-none object-contain transition-transform hover:scale-125 ${pawSizeClasses} ${isActive ? "scale-125" : ""}`}
+        />
+      ) : null}
+      <span className="sr-only">{shop.number}</span>
     </button>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { MapAreaOverlay } from "@/components/map/MapAreaOverlay";
 import { ShopMarker } from "@/components/map/ShopMarker";
@@ -15,22 +14,21 @@ type ShopMapExplorerProps = {
   mapAreas: MapArea[];
 };
 
-type ShopFilter = "all" | "food" | "drinks" | "student" | "business";
+type ShopFilter = "all" | "food" | "drinks";
 
 const shopFilters: Array<{ id: ShopFilter; label: string }> = [
   { id: "all", label: "すべて" },
   { id: "food", label: "フード" },
-  { id: "drinks", label: "ドリンク" },
-  { id: "student", label: "学生運営" },
-  { id: "business", label: "地域・企業" }
+  { id: "drinks", label: "ドリンク" }
 ];
+
+const maxShopsPerArea = 10;
 
 function matchesShopFilter(shop: Shop, filter: ShopFilter) {
   if (filter === "all") return true;
   if (filter === "food") return shop.category === "Food" || shop.category === "Dessert";
   if (filter === "drinks") return shop.category === "Drink";
-  if (filter === "business") return shop.category === "Local Business" || shop.organization.toLowerCase().includes("mitaka");
-  return shop.category !== "Local Business" && !shop.organization.toLowerCase().includes("mitaka");
+  return true;
 }
 
 export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
@@ -38,17 +36,25 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
   const [activeFilter, setActiveFilter] = useState<ShopFilter>("all");
   const [selectedAreaId, setSelectedAreaId] = useState<string | null>(null);
   const [highlightedShopId, setHighlightedShopId] = useState<string | null>(null);
-  const [popupShopId, setPopupShopId] = useState<string | null>(null);
   const [isSuggesting, setIsSuggesting] = useState(false);
   const [isZooming, setIsZooming] = useState(false);
   const [showAreaOverlays, setShowAreaOverlays] = useState(true);
-  const [shopVotes, setShopVotes] = useState<Record<string, number>>({});
+  const shopCardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  const displayableShops = useMemo(() => {
+    return mapAreas.flatMap((area) =>
+      shops
+        .filter((shop) => shop.areaId === area.id)
+        .sort((a, b) => a.number - b.number)
+        .slice(0, maxShopsPerArea)
+    );
+  }, [mapAreas, shops]);
 
   const suggestions = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     if (!normalizedQuery) return [];
 
-    return shops
+    return displayableShops
       .filter((shop) => matchesShopFilter(shop, activeFilter))
       .filter((shop) => {
         return (
@@ -58,18 +64,17 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
         );
       })
       .slice(0, 6);
-  }, [activeFilter, query, shops]);
+  }, [activeFilter, displayableShops, query]);
 
   const selectedArea = selectedAreaId ? mapAreas.find((area) => area.id === selectedAreaId) ?? null : null;
   const visibleShops = useMemo(() => {
     if (!selectedArea) return [];
 
-    return shops
+    return displayableShops
       .filter((shop) => shop.areaId === selectedArea.id)
       .filter((shop) => matchesShopFilter(shop, activeFilter))
       .sort((a, b) => a.number - b.number);
-  }, [activeFilter, selectedArea, shops]);
-  const popupShop = shops.find((shop) => shop.id === popupShopId) ?? null;
+  }, [activeFilter, displayableShops, selectedArea]);
 
   useEffect(() => {
     if (!isZooming) return;
@@ -77,15 +82,16 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
     return () => window.clearTimeout(timer);
   }, [isZooming]);
 
-  function getVotes(shop: Shop) {
-    return shop.votes + (shopVotes[shop.id] ?? 0);
-  }
+  useEffect(() => {
+    if (!highlightedShopId) return;
+    shopCardRefs.current[highlightedShopId]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+  }, [highlightedShopId]);
 
-  function handleVote(shopId: string) {
-    setShopVotes((prev) => ({
-      ...prev,
-      [shopId]: (prev[shopId] ?? 0) + 1
-    }));
+  function getVotes(shop: Shop) {
+    return shop.votes;
   }
 
   function handleSelectArea(areaId: string) {
@@ -95,7 +101,15 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
     setIsZooming(true);
     setSelectedAreaId(areaId);
     setHighlightedShopId(null);
-    setPopupShopId(null);
+  }
+
+  function handleResetMap() {
+    setShowAreaOverlays(false);
+    setIsZooming(true);
+    setSelectedAreaId(null);
+    setHighlightedShopId(null);
+    setQuery("");
+    window.setTimeout(() => setShowAreaOverlays(true), 700);
   }
 
   function focusShop(shop: Shop) {
@@ -107,7 +121,6 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
 
   function handleSelectShop(shop: Shop) {
     focusShop(shop);
-    setPopupShopId(shop.id);
   }
 
   function handleSearchSubmit(event: FormEvent<HTMLFormElement>) {
@@ -115,7 +128,6 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
     const match = suggestions[0];
     if (match) {
       focusShop(match);
-      setPopupShopId(match.id);
       setIsSuggesting(false);
     }
   }
@@ -124,35 +136,79 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
     ? `scale(${selectedArea.zoom.scale}) translate(${selectedArea.zoom.translateX}%, ${selectedArea.zoom.translateY}%)`
     : "scale(1) translate(0%, 0%)";
 
+  const areaShopPanel = selectedArea ? (
+    <div className="self-start rounded-2xl border border-white/20 bg-slate-950/55 p-2 text-white shadow-[0_18px_45px_rgba(0,0,0,0.28)] backdrop-blur-sm sm:p-3">
+      <h3 className="text-base font-black text-white sm:text-lg">
+        このエリアのお店 <span style={{ color: selectedArea.color.markerHover }}>({visibleShops.length}件)</span>
+      </h3>
+      <div className="mt-2 grid max-h-[14rem] auto-rows-[12.5rem] gap-2 overflow-y-auto px-1 py-1">
+        {visibleShops.map((shop) => (
+          <button
+            key={shop.id}
+            ref={(node) => {
+              shopCardRefs.current[shop.id] = node;
+            }}
+            type="button"
+            className={`h-full rounded-2xl border p-3 text-left transition hover:scale-[1.01] ${
+              shop.id === highlightedShopId
+                ? "bg-white/10"
+                : "border-white/10 bg-slate-950/45 hover:border-white/30"
+            }`}
+            style={
+              selectedArea && shop.id === highlightedShopId
+                ? {
+                    borderColor: selectedArea.color.markerHover,
+                    backgroundColor: `color-mix(in srgb, ${selectedArea.color.marker} 22%, transparent)`,
+                    boxShadow: `0 0 28px ${selectedArea.color.shadow}`
+                  }
+                : undefined
+            }
+            onClick={() => handleSelectShop(shop)}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-xs font-black" style={selectedArea ? { color: selectedArea.color.markerHover } : undefined}>
+                  #{shop.number}
+                </p>
+                <p className="mt-1 line-clamp-2 font-black text-white">{shop.name}</p>
+                <p className="mt-1 truncate text-xs font-semibold text-slate-400">{shop.organization}</p>
+              </div>
+              <span
+                className="shrink-0 rounded-full px-3 py-1 text-xs font-bold"
+                style={
+                  selectedArea
+                    ? {
+                        backgroundColor: `color-mix(in srgb, ${selectedArea.color.marker} 18%, transparent)`,
+                        color: selectedArea.color.markerHover
+                      }
+                    : undefined
+                }
+              >
+                {shop.locationLabel}
+              </span>
+            </div>
+            <p className="mt-2 line-clamp-2 text-sm leading-5 text-slate-300">{shop.description}</p>
+            <p className="mt-2 text-xs font-bold" style={selectedArea ? { color: selectedArea.color.markerHover } : undefined}>
+              {getVotes(shop)}票
+            </p>
+          </button>
+        ))}
+      </div>
+    </div>
+  ) : null;
+
   return (
     <div className="grid gap-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-3xl font-black text-white sm:text-4xl">ショップマップ</h1>
-        {selectedArea ? (
-          <Button
-            type="button"
-            variant="secondary"
-            className="w-full sm:w-auto"
-            onClick={() => {
-              setShowAreaOverlays(false);
-              setIsZooming(true);
-              setSelectedAreaId(null);
-              setHighlightedShopId(null);
-              setPopupShopId(null);
-              setQuery("");
-              window.setTimeout(() => setShowAreaOverlays(true), 700);
-            }}
-          >
-            全体マップに戻る
-          </Button>
-        ) : null}
+      <div>
+        <h1 className="text-sm font-bold text-cyan-200">ショップマップ</h1>
       </div>
 
-      <section className="grid gap-6 rounded-[1.5rem] border border-white/10 bg-white/10 p-3 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur sm:rounded-[2rem] sm:p-5 xl:grid-cols-[minmax(0,1fr)_480px] xl:gap-8 2xl:grid-cols-[minmax(0,1fr)_540px]">
-        <div>
-          <div className="relative h-[320px] w-full overflow-hidden rounded-2xl border border-white/10 bg-white sm:h-[520px] lg:h-[560px] xl:h-[610px]">
-            <div className="absolute left-0 top-0 w-full origin-top-left transition-transform duration-700 ease-out" style={{ transform: mapTransform }}>
-              <img src="/images/map/full-campus-map.png" alt="ICUキャンパスマップ" className="w-full" />
+      <section className="grid items-start gap-6 rounded-[1.5rem] border border-white/10 bg-white/10 p-3 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur sm:rounded-[2rem] sm:p-5 xl:grid-cols-[minmax(0,1fr)_480px] xl:gap-8 2xl:grid-cols-[minmax(0,1fr)_540px]">
+        <div className="grid w-full items-start gap-4">
+          {areaShopPanel}
+          <div className="relative aspect-[1477/1065] w-full overflow-hidden rounded-2xl border border-white/10 bg-white">
+            <div className="absolute inset-0 origin-top-left transition-transform duration-700 ease-out" style={{ transform: mapTransform }}>
+              <img src="/images/map/full-campus-map.png" alt="ICUキャンパスマップ" className="h-full w-full object-contain" />
               {selectedArea
                 ? visibleShops.map((shop) => (
                     <ShopMarker
@@ -160,65 +216,11 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
                       shop={shop}
                       onClick={handleSelectShop}
                       isActive={shop.id === highlightedShopId}
+                      zoomScale={selectedArea.zoom.scale}
                       color={selectedArea.color}
                     />
                   ))
                 : null}
-              {popupShop && selectedArea ? (
-                <div
-                  className="absolute z-30 w-56 max-w-[calc(100vw_-_2rem)] rounded-2xl border border-white/25 bg-slate-950/95 p-3 text-white shadow-[0_18px_45px_rgba(0,0,0,0.4)] backdrop-blur sm:w-64 sm:rounded-3xl sm:p-4"
-                  style={{
-                    left: `clamp(7rem, ${popupShop.marker.x}%, calc(100% - 7rem))`,
-                    top: `${popupShop.marker.y}%`,
-                    transform: `translate(-50%, 18px) scale(${1 / selectedArea.zoom.scale})`,
-                    transformOrigin: "top center"
-                  }}
-                >
-                  <div
-                    className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-l border-t border-white/25 bg-slate-950/95"
-                    style={{ boxShadow: `-8px -8px 18px ${selectedArea.color.shadow}` }}
-                  />
-                  <div className="relative">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <p className="text-xs font-black" style={{ color: selectedArea.color.markerHover }}>
-                          #{popupShop.number}
-                        </p>
-                        <h3 className="mt-1 line-clamp-2 text-sm font-black leading-tight sm:text-base">{popupShop.name}</h3>
-                        <p className="mt-1 truncate text-xs font-semibold text-slate-400">{popupShop.organization}</p>
-                      </div>
-                      <button
-                        type="button"
-                        className="rounded-full border border-white/15 px-2 py-1 text-xs font-bold text-slate-300 hover:bg-white/10"
-                        onClick={() => setPopupShopId(null)}
-                        aria-label="店舗詳細を閉じる"
-                      >
-                        ×
-                      </button>
-                    </div>
-                    <p className="mt-3 line-clamp-3 text-xs leading-5 text-slate-300">{popupShop.description}</p>
-                    <div className="mt-3 flex flex-wrap items-center gap-2">
-                      <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-slate-100">
-                        {getVotes(popupShop)}票
-                      </span>
-                      <button
-                        type="button"
-                        className="rounded-full px-3 py-1 text-xs font-black"
-                        style={{ backgroundColor: selectedArea.color.marker, color: selectedArea.color.text }}
-                        onClick={() => handleVote(popupShop.id)}
-                      >
-                        投票
-                      </button>
-                      <Link
-                        href={`/shops/${popupShop.id}`}
-                        className="rounded-full border border-white/15 px-3 py-1 text-xs font-bold text-slate-100 hover:bg-white/10"
-                      >
-                        詳細
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ) : null}
             </div>
             {!selectedArea && showAreaOverlays
               ? mapAreas.map((area) => <MapAreaOverlay key={area.id} area={area} onSelect={handleSelectArea} />)
@@ -234,6 +236,11 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
               }}
             />
           </div>
+          {selectedArea ? (
+            <Button type="button" variant="secondary" className="w-full" onClick={handleResetMap}>
+              全体マップに戻る
+            </Button>
+          ) : null}
         </div>
 
         <aside className="min-w-0 p-1 sm:p-2">
@@ -259,7 +266,6 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
                       onClick={() => {
                         setQuery(shop.name);
                         focusShop(shop);
-                        setPopupShopId(shop.id);
                         setIsSuggesting(false);
                       }}
                     >
@@ -289,44 +295,11 @@ export function ShopMapExplorer({ shops, mapAreas }: ShopMapExplorerProps) {
                 onClick={() => {
                   setActiveFilter(filter.id);
                   setHighlightedShopId(null);
-                  setPopupShopId(null);
                 }}
               >
                 {filter.label}
               </button>
             ))}
-          </div>
-          <p className="text-sm font-bold text-cyan-200">{selectedArea ? `このエリアに${visibleShops.length}店舗` : "エリアを選択"}</p>
-          <h3 className="mt-2 text-xl font-black text-white sm:text-2xl">{selectedArea ? "このエリアのお店" : "エリアを選択してください"}</h3>
-          <div className="mt-5 grid max-h-[70dvh] gap-4 overflow-y-auto px-1 py-2 xl:max-h-[820px]">
-            {visibleShops.map((shop) => (
-              <button
-                key={shop.id}
-                type="button"
-                className={`rounded-3xl border p-5 text-left transition hover:scale-[1.01] ${
-                  shop.id === highlightedShopId
-                    ? "border-cyan-200 bg-cyan-300/20 shadow-[0_0_30px_rgba(34,211,238,0.25)]"
-                    : "border-white/10 bg-slate-950/45 hover:border-cyan-200/60"
-                }`}
-                onClick={() => handleSelectShop(shop)}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="text-xs font-black text-cyan-200">#{shop.number}</p>
-                    <p className="mt-1 line-clamp-2 font-black text-white">{shop.name}</p>
-                    <p className="mt-1 truncate text-xs font-semibold text-slate-400">{shop.organization}</p>
-                  </div>
-                  <span className="shrink-0 rounded-full bg-blue-500/20 px-3 py-1 text-xs font-bold text-blue-100">{shop.locationLabel}</span>
-                </div>
-                <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-300">{shop.description}</p>
-                <p className="mt-3 text-xs font-bold text-cyan-200">{getVotes(shop)}票</p>
-              </button>
-            ))}
-            {!selectedArea ? (
-              <div className="rounded-2xl border border-dashed border-white/15 p-4 text-sm leading-6 text-slate-400">
-                まずマップ上の光る円を選ぶか、検索バーでお店名を入力してください。
-              </div>
-            ) : null}
           </div>
         </aside>
       </section>

@@ -43,8 +43,7 @@ export function CampusMap({ shops, mapAreas }: CampusMapProps) {
       <section className="rounded-2xl border border-slate-200 bg-white p-3 shadow-soft sm:rounded-3xl sm:p-6">
         <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <Badge>インタラクティブマップ</Badge>
-            <h1 className="mt-3 text-3xl font-black text-slate-900 md:text-4xl">キャンパスマップ</h1>
+            <Badge>キャンパスマップ</Badge>
             <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">マップのエリアをクリックして、お店を探してみましょう。</p>
           </div>
           {selectedArea ? (
@@ -71,11 +70,11 @@ export function CampusMap({ shops, mapAreas }: CampusMapProps) {
             <AreaZoomPanel area={selectedArea} shops={visibleShops} onSelectShop={(shop) => setSelectedShopId(shop.id)} />
           </div>
         ) : (
-          <div className="relative mx-auto w-full max-w-6xl overflow-hidden rounded-2xl border border-slate-200">
+          <div className="relative mx-auto aspect-[1477/1065] w-full max-w-6xl overflow-hidden rounded-2xl border border-slate-200">
             <img
               src="/images/map/full-campus-map.png"
               alt="ICUキャンパスマップ"
-              className="w-full"
+              className="h-full w-full object-contain"
             />
             {mapAreas.map((area) => (
               <MapAreaOverlay key={area.id} area={area} onSelect={setSelectedAreaId} />

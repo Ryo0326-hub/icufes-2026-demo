@@ -9,7 +9,7 @@ export function MapAreaOverlay({ area, onSelect }: MapAreaOverlayProps) {
   return (
     <button
       type="button"
-      className="absolute flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border backdrop-blur transition hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 sm:h-14 sm:w-14"
+      className="absolute flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border backdrop-blur transition hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 sm:h-14 sm:w-14"
       style={{
         left: `${area.bounds.x}%`,
         top: `${area.bounds.y}%`,
@@ -21,7 +21,7 @@ export function MapAreaOverlay({ area, onSelect }: MapAreaOverlayProps) {
       onClick={() => onSelect(area.id)}
       aria-label={`${area.name}を表示`}
     >
-      <span className="px-1 text-center text-[7px] font-black leading-tight sm:text-[9px]">{area.name}</span>
+      <span className="px-0.5 text-center text-[6px] font-black leading-tight sm:px-1 sm:text-[9px]">{area.name}</span>
     </button>
   );
 }

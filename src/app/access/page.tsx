@@ -8,8 +8,7 @@ export default function AccessPage() {
     >
       <div className="mx-auto max-w-7xl">
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm font-bold text-cyan-200">アクセス</p>
-          <h1 className="mt-2 text-3xl font-black text-white sm:text-4xl">アクセス</h1>
+          <h1 className="text-sm font-bold text-cyan-200">アクセス</h1>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
             ICU祭へお越しの際は、公共交通機関のご利用をおすすめします。三鷹駅・武蔵境駅からバスでアクセスできます。
           </p>

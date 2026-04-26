@@ -8,8 +8,7 @@ export default function AboutPage() {
     >
       <div className="mx-auto max-w-5xl">
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm font-bold text-cyan-200">概要</p>
-          <h1 className="mt-2 text-3xl font-black text-white sm:text-4xl">ICU祭について</h1>
+          <h1 className="text-sm font-bold text-cyan-200">ICU祭について</h1>
         </div>
         <Card className="border-white/10 bg-white/10 text-sm leading-8 text-slate-200 backdrop-blur sm:text-base">
           <p>
