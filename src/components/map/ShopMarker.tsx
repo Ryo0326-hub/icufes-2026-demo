@@ -30,15 +30,13 @@ const pawImageByMarkerColor: Record<string, string> = {
 
 export function ShopMarker({ shop, onClick, isActive = false, zoomScale = 1, color = defaultColor }: ShopMarkerProps) {
   const pawImage = pawImageByMarkerColor[color.marker];
-  const hitAreaClasses = "h-12 w-12 sm:h-14 sm:w-14 lg:h-28 lg:w-28";
-  const pawSizeClasses = "h-full w-full";
   const markerScale = 1 / zoomScale;
 
   return (
     <button
       type="button"
-      className={`absolute z-20 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-1 ${hitAreaClasses} ${
-        pawImage ? "bg-transparent p-0" : "rounded-full text-[6px] font-black shadow-sm transition hover:scale-125 sm:text-[8px] lg:text-[10px]"
+      className={`group absolute z-20 flex h-6 w-6 items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-1 sm:h-7 sm:w-7 lg:h-8 lg:w-8 ${
+        pawImage ? "bg-transparent p-0" : "rounded-full text-[6px] font-black shadow-sm sm:text-[8px] lg:text-[10px]"
       }`}
       style={{
         left: `${shop.marker.x}%`,
@@ -58,7 +56,9 @@ export function ShopMarker({ shop, onClick, isActive = false, zoomScale = 1, col
           src={pawImage}
           alt=""
           aria-hidden="true"
-          className={`pointer-events-none object-contain transition-transform hover:scale-125 ${pawSizeClasses} ${isActive ? "scale-125" : ""}`}
+          className={`pointer-events-none h-full w-full rounded-full object-cover object-center transition-transform duration-150 ${
+            isActive ? "scale-125" : "group-hover:scale-110"
+          }`}
         />
       ) : null}
       <span className="sr-only">{shop.number}</span>

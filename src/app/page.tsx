@@ -14,13 +14,16 @@ import { shops } from "@/data/shops";
 export default function HomePage() {
   return (
     <div className="bg-[linear-gradient(180deg,#020617_0%,#030712_48%,#000_100%)] text-white">
-      <section
-        className="relative min-h-[calc(100dvh_-_4.25rem)] overflow-hidden bg-cover bg-center text-white lg:min-h-[92vh]"
-        style={{ backgroundImage: "url('/images/backgrounds/background-image1.png')" }}
-      >
+      <section className="relative h-[calc(100svh_-_4.25rem)] min-h-[calc(100svh_-_4.25rem)] overflow-hidden text-white lg:h-auto lg:min-h-[92vh]">
+        <img
+          src="/images/backgrounds/background-image1.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.1),rgba(2,6,23,0.35)_34%,rgba(0,0,0,0.82)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#020617] to-transparent" />
-        <div className="relative mx-auto grid min-h-[calc(100dvh_-_4.25rem)] max-w-7xl items-start gap-10 px-4 pb-14 pt-5 sm:px-6 sm:pb-20 sm:pt-8 lg:min-h-[92vh] lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center lg:px-8 lg:py-20">
+        <div className="relative mx-auto grid h-full max-w-7xl items-start gap-10 px-4 pb-14 pt-5 sm:px-6 sm:pb-20 sm:pt-8 lg:min-h-[92vh] lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center lg:px-8 lg:py-20">
           <div className="max-w-4xl">
             <div className="mx-auto mb-5 grid w-fit justify-items-center lg:hidden">
               <WelcomeBubble
